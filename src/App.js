@@ -88,7 +88,7 @@ class App extends Component {
       return player;
     });
     this.setState({players}, () => {
-      let hasWinner = this.state.players.find(player => player.score > MAX_SCORE);
+      let hasWinner = this.state.players.find(player => player.score >= MAX_SCORE);
       if (hasWinner) {
         let players = this.state.players.map(player => {
           if (player.active) {
@@ -113,26 +113,26 @@ class App extends Component {
     let {players, dice} = this.state;
     return (
       <div className="wrapper clearfix">
-            <Player
-              score={players[0].score}
-              current={players[0].current}
-              active={players[0].active}
-              nome={players[0].nome}
-              winner={players[0].winner}
-            />
-            <Player
-              score={players[1].score}
-              current={players[1].current}
-              active={players[1].active}
-              nome={players[1].nome}
-              winner={players[1].winner}
-            />
-            <button className="btn-new" onClick={this.newGame}><i className="ion-ios-plus-outline"></i>New game</button>
-            <button className="btn-roll" onClick={this.rollDice}><i className="ion-ios-loop"></i>Roll dice</button>
-            <button className="btn-hold" onClick={this.holdDice}><i className="ion-ios-download-outline"></i>Hold</button>
-            {
-              dice !== 0 && <img src={require(`../dice-${dice}.png`)} alt="Dice" className="dice" /> 
-            }
+        {
+          players.map(player => {
+            return (
+              <Player
+                key={player.nome}
+                score={player.score}
+                current={player.current}
+                active={player.active}
+                nome={player.nome}
+                winner={player.winner}
+              />
+            )
+          })
+        }
+        <button className="btn-new" onClick={this.newGame}><i className="ion-ios-plus-outline"></i>New game</button>
+        <button className="btn-roll" onClick={this.rollDice}><i className="ion-ios-loop"></i>Roll dice</button>
+        <button className="btn-hold" onClick={this.holdDice}><i className="ion-ios-download-outline"></i>Hold</button>
+        {
+          dice !== 0 && <img src={require(`../dice-${dice}.png`)} alt="Dice" className="dice" /> 
+        }
         </div>
     );
   }
