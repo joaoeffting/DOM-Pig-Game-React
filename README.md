@@ -1,5 +1,7 @@
 # DOM Pig Game
 
+![alt tag](print.png)
+
 ## To run this project use:
 ```
 npm install
